@@ -1,13 +1,11 @@
 import * as THREE from "three";
 
 export function mainbis() {
-    console.log("test");
-
-    animate(1000);
+    animate(0);
 }
 
-const width = window.innerWidth,
-    height = window.innerHeight;
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 // init
 
