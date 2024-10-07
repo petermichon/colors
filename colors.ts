@@ -3,7 +3,7 @@ import { Mouse } from "./io/mouse";
 import { World } from "./world";
 
 import {
-    getKeyboardInputs,
+    // getKeyboardInputs,
     getMouseInputs,
     getCanvasSize,
     calculateFPS,
