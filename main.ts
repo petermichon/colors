@@ -17,6 +17,4 @@ export function main() {
     console.log("test1");
 
     World.query((e) => e.beginAnimation)[0].beginAnimation();
-
-    console.log("test2");
 }

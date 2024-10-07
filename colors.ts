@@ -26,11 +26,11 @@ import { sumDeltaMovements } from "./systems/D_sync";
 import { showOnGrid, showOnCanvas, showTextOnCanvas } from "./systems/E_show";
 
 export function loadEntities() {
-    World.add({
-        type: "system-keyboard",
-        getKeyboardInputs,
-        inputs: { up: false, down: false, left: false, right: false },
-    });
+    // World.add({
+    //     type: "system-keyboard",
+    //     getKeyboardInputs,
+    //     inputs: { up: false, down: false, left: false, right: false },
+    // });
 
     World.add({
         type: "system-mouse",
@@ -79,13 +79,13 @@ export function loadEntities() {
         },
         systems: [
             { update: calculateFPS },
-            { update: getKeyboardInputs },
+            // { update: getKeyboardInputs },
             { update: getMouseInputs },
             { update: getCanvasSize },
             // ---
             { update: updateTarget },
             { update: updateFPS },
-            { update: updateMovementsFromInputs },
+            // { update: updateMovementsFromInputs },
             { update: shootBullet },
             { update: updateLifetime },
             { update: revealOnClick },
@@ -128,8 +128,8 @@ export function loadEntities() {
         color: "#EEEEEE",
     });
 
-    // loadShooter();
-    loadMinesweeper();
+    loadShooter();
+    // loadMinesweeper();
 }
 
 export function loadShooter() {
@@ -148,6 +148,7 @@ export function loadShooter() {
         dy: [],
         speed: 8,
         color: "#EEEEEE",
+        inputs: { up: false, down: false, left: false, right: false },
     });
 
     World.add({
