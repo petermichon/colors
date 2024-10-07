@@ -5,6 +5,7 @@
 
 export function main() {
     console.log("test");
+    console.log("test");
     // loadEntities();
     // {
     //     const e = World.query((e) => e.setMouse)[0];
