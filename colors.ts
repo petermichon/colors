@@ -73,7 +73,6 @@ export function loadEntities() {
                 for (let currentEntity of World.entities) {
                     if (currentEntity[system.update.name]) {
                         system.update(currentEntity);
-                        console.log("test");
                     }
                 }
             }

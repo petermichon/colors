@@ -1,3 +1,7 @@
-import { main } from "./main";
+// import { main } from "./main";
 
-main();
+// main();
+
+import { mainbis } from "./mainbis.ts";
+
+mainbis();
