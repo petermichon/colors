@@ -1,6 +1,7 @@
 import * as THREE from "three";
 
 export function mainbis() {
+    console.log("deno");
     animate(0);
 }
 
