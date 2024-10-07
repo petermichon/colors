@@ -5,7 +5,6 @@ import { loadEntities } from "./colors";
 
 export function main() {
     loadEntities();
-
     {
         const e = World.query((e) => e.setMouse)[0];
         const x = Math.trunc(Canvas.getWidth() / 2);
@@ -13,8 +12,6 @@ export function main() {
         e.setMouse(x, y);
         e.setMouse = undefined;
     }
-
     console.log("test1");
-
     World.query((e) => e.beginAnimation)[0].beginAnimation();
 }
