@@ -1,7 +1,7 @@
-import { Canvas } from "./io/canvas";
-import { World } from "./world";
+// import { Canvas } from "./io/canvas";
+// import { World } from "./world";
 
-import { loadEntities } from "./colors";
+// import { loadEntities } from "./colors";
 
 // export function main() {
 //     loadEntities();
