@@ -3,7 +3,7 @@
     "short_name": "Colors",
     "theme_color": "#000000",
     "background_color": "#ffffff",
-    "display": "standalone",
+    "display": "fullscreen",
     "orientation": "portrait",
     "scope": "/",
     "start_url": "/",
