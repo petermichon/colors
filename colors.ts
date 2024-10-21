@@ -128,8 +128,8 @@ export function loadEntities() {
         color: "#EEEEEE",
     });
 
-    loadShooter();
-    // loadMinesweeper();
+    // loadShooter();
+    loadMinesweeper();
 }
 
 export function loadShooter() {
