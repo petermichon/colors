@@ -18,7 +18,7 @@ export function old() {
     // World.query((e) => e.beginAnimation)[0].beginAnimation();
 }
 
-export function main() {
+export default function main() {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
