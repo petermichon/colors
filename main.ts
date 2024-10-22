@@ -5,7 +5,7 @@
 
 import * as THREE from "three";
 
-export function main() {
+export function old() {
     // loadEntities();
     // {
     //     const e = World.query((e) => e.setMouse)[0];
@@ -16,35 +16,36 @@ export function main() {
     // }
     // console.log("test1");
     // World.query((e) => e.beginAnimation)[0].beginAnimation();
-    animate(1000);
 }
 
-const width = window.innerWidth,
-    height = window.innerHeight;
+export function main() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
-// init
+    // Camera
+    const camera = new THREE.PerspectiveCamera(90, width / height);
+    camera.position.z = 1;
 
-const camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 10);
-camera.position.z = 1;
+    // Scene
+    const scene = new THREE.Scene();
 
-const scene = new THREE.Scene();
+    // Renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(width, height);
+    renderer.setAnimationLoop(animate);
+    document.body.appendChild(renderer.domElement);
 
-const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-const material = new THREE.MeshNormalMaterial();
+    // Elements
+    const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+    const material = new THREE.MeshNormalMaterial();
 
-const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(width, height);
-renderer.setAnimationLoop(animate);
-document.body.appendChild(renderer.domElement);
+    function animate(time: number) {
+        mesh.rotation.x = time / 2000;
+        mesh.rotation.y = time / 1000;
 
-// animation
-
-function animate(time: number) {
-    mesh.rotation.x = time / 2000;
-    mesh.rotation.y = time / 1000;
-
-    renderer.render(scene, camera);
+        renderer.render(scene, camera);
+    }
 }
