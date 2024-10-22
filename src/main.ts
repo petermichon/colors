@@ -43,6 +43,13 @@ export default function main() {
     scene.add(mesh);
 
     function animate(time: number) {
+        {
+            // Auto resize canvas
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            renderer.setSize(width, height);
+        }
+
         mesh.rotation.x = time / 2000;
         mesh.rotation.y = time / 1000;
 
