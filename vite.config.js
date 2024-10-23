@@ -2,8 +2,8 @@ import { defineConfig } from "vite";
 
 export default {
     // config options
-    // root: "./src",
-    root: ".",
+    root: "./src",
+    // root: ".",
 };
 
 // export default defineConfig({
