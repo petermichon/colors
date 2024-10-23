@@ -20,5 +20,5 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
-    "include": ["src"]
+    "include": ["src", "app/io", "app/colors.ts", "app/world.ts", "app/main.ts"]
 }

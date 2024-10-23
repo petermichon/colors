@@ -1,4 +1,4 @@
-import { Canvas } from "../io/canvas";
+import { Canvas } from "../../app/io/canvas";
 import { World } from "../world";
 
 export function showOnCanvas(entity: any) {

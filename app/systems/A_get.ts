@@ -1,6 +1,6 @@
-import { Mouse } from "../io/mouse";
-import { Keyboard } from "../io/keyboard";
-import { Canvas } from "../io/canvas";
+import { Mouse } from "../../app/io/mouse";
+import { Keyboard } from "../../app/io/keyboard";
+import { Canvas } from "../../app/io/canvas";
 
 export function getMouseInputs(entity: any) {
     entity.x = Mouse.x;
