@@ -57,7 +57,7 @@ export default function main() {
 
     // Lights
     const light = new THREE.PointLight(0xffffff, 1);
-    light.position.set(-3.5, 2, -9.5);
+    light.position.set(0, 2, 0);
     scene.add(light);
 
     // Helpers
@@ -73,15 +73,15 @@ export default function main() {
     function animate(time: number) {
         {
             // Auto resize canvas
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            renderer.setSize(width, height);
+            // const width = window.innerWidth;
+            // const height = window.innerHeight;
+            // renderer.setSize(width, height);
         }
 
         // mesh.rotation.x = time / 2000;
         // mesh.rotation.y = time / 1000;
-        light.position.x += Math.cos(time / 1000) * 0.1;
-        light.position.z += Math.sin(time / 1000) * 0.1;
+        // light.position.x += Math.cos(time / 1000) * 0.1;
+        light.position.z += Math.sin(time / 1000) * 0.05;
 
         renderer.render(scene, camera);
     }
