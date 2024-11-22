@@ -1,3 +1,3 @@
 # Colors Platform
 
-Create games and websites on Colors low-code development platform
+Colors is a low-code development platform for creating games, websites and applications.
