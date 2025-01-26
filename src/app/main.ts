@@ -3,7 +3,7 @@
 
 // import { loadEntities } from "./colors";
 
-import * as THREE from "three";
+import * as THREE from 'three'
 
 // function old() {
 // loadEntities();
@@ -18,80 +18,82 @@ import * as THREE from "three";
 // World.query((e) => e.beginAnimation)[0].beginAnimation();
 // }
 
-import { OrbitControls } from "three/examples/jsm/Addons.js";
+import { OrbitControls } from 'three/examples/jsm/Addons.js'
+
+const windowGlobal = globalThis
 
 export default function main() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+  const width = windowGlobal.innerWidth
+  const height = windowGlobal.innerHeight
 
-    // Camera
-    const camera = new THREE.PerspectiveCamera(75, width / height);
-    camera.position.set(8, 4, 8);
+  // Camera
+  const camera = new THREE.PerspectiveCamera(75, width / height)
+  camera.position.set(8, 4, 8)
 
-    // Scene
-    const scene = new THREE.Scene();
+  // Scene
+  const scene = new THREE.Scene()
 
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(width, height);
-    renderer.setAnimationLoop(animate);
-    document.body.appendChild(renderer.domElement);
+  // Renderer
+  const renderer = new THREE.WebGLRenderer({ antialias: true })
+  renderer.setSize(width, height)
+  renderer.setAnimationLoop(animate)
+  document.body.appendChild(renderer.domElement)
 
-    // Controls
-    const controls = new OrbitControls(camera, renderer.domElement);
+  // Controls
+  const controls = new OrbitControls(camera, renderer.domElement)
 
-    // Boxes
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshStandardMaterial();
+  // Boxes
+  const geometry = new THREE.BoxGeometry(1, 1, 1)
+  const material = new THREE.MeshStandardMaterial()
 
+  {
+    const mesh = new THREE.Mesh(geometry, material)
+    mesh.position.set(-1.5, 0.5, -1.5)
+    scene.add(mesh)
+  }
+  {
+    const mesh = new THREE.Mesh(geometry, material)
+    mesh.position.set(1.5, 0.5, 1.5)
+    scene.add(mesh)
+  }
+
+  // Lights
+  const light = new THREE.PointLight(0xffffff, 1)
+  light.position.set(0, 2, 0)
+  scene.add(light)
+
+  // Helpers
+  const gridSize = 50
+  const gridHelper = new THREE.GridHelper(gridSize, gridSize)
+  scene.add(gridHelper)
+
+  const lightHelper = new THREE.PointLightHelper(light)
+  scene.add(lightHelper)
+
+  controls.update()
+
+  function animate(time: number) {
     {
-        const mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(-1.5, 0.5, -1.5);
-        scene.add(mesh);
-    }
-    {
-        const mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(1.5, 0.5, 1.5);
-        scene.add(mesh);
+      // Auto resize canvas
+      // const width = window.innerWidth;
+      // const height = window.innerHeight;
+      // renderer.setSize(width, height);
     }
 
-    // Lights
-    const light = new THREE.PointLight(0xffffff, 1);
-    light.position.set(0, 2, 0);
-    scene.add(light);
+    // mesh.rotation.x = time / 2000;
+    // mesh.rotation.y = time / 1000;
+    // light.position.x += Math.cos(time / 1000) * 0.1;
+    light.position.z += Math.sin(time / 1000) * 0.05
 
-    // Helpers
-    const gridSize = 50;
-    const gridHelper = new THREE.GridHelper(gridSize, gridSize);
-    scene.add(gridHelper);
+    renderer.render(scene, camera)
+  }
 
-    const lightHelper = new THREE.PointLightHelper(light);
-    scene.add(lightHelper);
+  windowGlobal.addEventListener('resize', onWindowResize, false)
 
-    controls.update();
+  function onWindowResize() {
+    camera.aspect = windowGlobal.innerWidth / windowGlobal.innerHeight
+    camera.updateProjectionMatrix()
 
-    function animate(time: number) {
-        {
-            // Auto resize canvas
-            // const width = window.innerWidth;
-            // const height = window.innerHeight;
-            // renderer.setSize(width, height);
-        }
-
-        // mesh.rotation.x = time / 2000;
-        // mesh.rotation.y = time / 1000;
-        // light.position.x += Math.cos(time / 1000) * 0.1;
-        light.position.z += Math.sin(time / 1000) * 0.05;
-
-        renderer.render(scene, camera);
-    }
-
-    window.addEventListener("resize", onWindowResize, false);
-
-    function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    }
+    renderer.setSize(windowGlobal.innerWidth, windowGlobal.innerHeight)
+  }
 }
