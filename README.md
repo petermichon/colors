@@ -1,3 +1,3 @@
-# Colors Platform
+# Colors
 
 Under development
