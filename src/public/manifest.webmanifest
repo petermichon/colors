@@ -26,6 +26,13 @@
       "type": "image/png",
       "form_factor": "wide",
       "label": "Wonder Widgets"
+    },
+    {
+      "src": "screenshot-narrow.png",
+      "sizes": "320x640",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Wonder Widgets"
     }
   ]
 }
