@@ -1,6 +1,7 @@
 {
   "name": "Colors Platform",
   "short_name": "Colors",
+  "description": "Create games and websites on Colors low-code development platform",
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "display": "fullscreen",
