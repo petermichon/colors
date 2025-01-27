@@ -1,33 +1,32 @@
-const CACHE_NAME = 'v1'
-
 self.addEventListener('install', () => {
-  console.log('Service Worker installed')
+  console.log('install') // DEBUG
 })
 
 self.addEventListener('activate', () => {
-  console.log('Service Worker activated')
+  console.log('activate') // DEBUG
 })
 
 self.addEventListener('fetch', (event) => {
-  console.log('Fetch intercepted for: ', event.request.url)
+  console.log('fetch:', event.request.url) // DEBUG
 
-  const response = caches
-    .match(event.request) // Try to fetch from the cache
-    .then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse // Return cached file if available
-      }
+  // function cacheResponse(cachedResponse) {
+  //   const cacheName = 'v1'
+  //   // If not in cache, fetch from network
+  //   return fetch(event.request).then((response) => {
+  //     // Optionally cache the new files for future use
+  //     const responseClone = response.clone()
+  //     caches.open(cacheName).then((cache) => {
+  //       cache.put(event.request, responseClone) // Cache the new file
+  //     })
+  //     return response
+  //   })
+  // }
 
-      // If not in cache, fetch from network
-      return fetch(event.request).then((response) => {
-        // Optionally cache the new files for future use
-        const responseClone = response.clone()
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseClone) // Cache the new file
-        })
-        return response
-      })
-    })
+  // Try to fetch from the cache
+  // const matchResponse = caches.match(event.request)
 
-  event.respondWith(response)
+  // ?
+  // const response = matchResponse.then(cacheResponse)
+
+  // event.respondWith(response)
 })
