@@ -1,3 +1,3 @@
-import main from './app/main.ts'
+import main from "./app/main.ts"
 
 main()
