@@ -78,6 +78,27 @@ export default function main() {
   }
 }
 
+// ---
+
 export function requestFullscreen() {
   document.documentElement.requestFullscreen({ navigationUI: 'hide' })
 }
+
+// ---
+
+// deno-lint-ignore no-explicit-any
+let installPrompt: any
+
+globalThis.addEventListener('beforeinstallprompt', (e) => {
+  console.log('beforeinstallprompt')
+  // e.preventDefault();
+  installPrompt = e
+})
+
+export function prompt() {
+  installPrompt.prompt()
+}
+
+// document.addEventListener('click', prompt, { once: true })
+
+// ---
