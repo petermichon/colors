@@ -77,3 +77,7 @@ export default function main() {
     renderer.setSize(globalThis.innerWidth, globalThis.innerHeight)
   }
 }
+
+export function requestFullscreen() {
+  document.documentElement.requestFullscreen({ navigationUI: 'hide' })
+}
