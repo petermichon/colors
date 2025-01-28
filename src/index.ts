@@ -1,5 +1,7 @@
 import main from './app/main.ts'
 
+document.documentElement.requestFullscreen({ navigationUI: 'hide' })
+
 if ('serviceWorker' in navigator) {
   globalThis.addEventListener('load', () => {
     navigator.serviceWorker
