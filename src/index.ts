@@ -14,3 +14,18 @@ if ('serviceWorker' in navigator) {
 }
 
 main()
+
+// deno-lint-ignore no-explicit-any
+let installPrompt: any
+
+globalThis.addEventListener('beforeinstallprompt', (e) => {
+  console.log('beforeinstallprompt')
+  // e.preventDefault();
+  installPrompt = e
+})
+
+document.addEventListener('click', prompt, { once: true })
+
+function prompt() {
+  installPrompt.prompt()
+}
