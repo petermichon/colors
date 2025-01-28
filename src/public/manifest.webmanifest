@@ -3,14 +3,9 @@
   "short_name": "Colors",
   "description": "Create games and websites on Colors low-code development platform",
   "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "display": "browser",
-  "display_override": [
-    "window-controls-overlay",
-    "fullscreen",
-    "standalone",
-    "minimal-ui"
-  ],
+  "background_color": "#282828",
+  "display_override": ["window-controls-overlay"],
+  "display": "fullscreen",
   "orientation": "any",
   "scope": "/",
   "start_url": "/",
