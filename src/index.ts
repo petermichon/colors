@@ -8,7 +8,7 @@ if ('serviceWorker' in navigator) {
         console.log('scope:', registration.scope) // DEBUG
       })
       .catch((error) => {
-        console.log('Service Worker registration failed:', error) // DEBUG
+        console.log('register:', error) // DEBUG
       })
   })
 }
