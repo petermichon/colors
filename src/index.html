@@ -20,16 +20,6 @@
 </head>
 
 <body>
-  <button id="fullscreenBtn">Passer en plein écran</button>
-
-  <script>
-    document.getElementById('fullscreenBtn').addEventListener('click', () => {
-      if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen({ navigationUI: 'hide' })
-          .catch(err => console.log("Erreur lors du passage en plein écran : ", err));
-      }
-    });
-  </script>
 </body>
 
 </html>
