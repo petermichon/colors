@@ -1,7 +1,7 @@
 {
-  "name": "Colors Platform",
+  "name": "Colors",
   "short_name": "Colors",
-  "description": "Create games and websites on Colors low-code development platform",
+  "description": "3D environment for the web",
   "theme_color": "#000000",
   "background_color": "#282828",
   "display_override": ["window-controls-overlay"],
