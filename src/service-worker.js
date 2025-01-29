@@ -14,7 +14,6 @@ self.addEventListener('fetch', (event) => {
     try {
       const networkResponse = await fetch(event.request)
       await cache.put(event.request, networkResponse.clone())
-      return networkResponse
     } catch (error) {
       console.log(error) // DEBUG
     }
