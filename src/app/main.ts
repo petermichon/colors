@@ -23,7 +23,7 @@ export default function main() {
   const controls = new OrbitControls(camera, renderer.domElement)
 
   // Boxes
-  const geometry = new THREE.BoxGeometry(1, 1, 1)
+  const geometry = new THREE.BoxGeometry(2, 1, 1)
   const material = new THREE.MeshStandardMaterial()
 
   {
