@@ -9,6 +9,16 @@ self.addEventListener('activate', () => {
 })
 
 self.addEventListener('fetch', (event) => {
+  async function fetchDirectly() {
+    try {
+      const networkResponse = await fetch(event.request)
+      return networkResponse
+    } catch (error) {
+      error
+      return new Response('Offline', { status: 503 })
+    }
+  }
+
   async function updateCache() {
     const cache = await caches.open('v1')
     try {
@@ -31,12 +41,17 @@ self.addEventListener('fetch', (event) => {
     return new Response('Offline', { status: 503 })
   }
 
-  async function f() {
+  async function fetchWithoutCache() {
+    return await fetchDirectly()
+  }
+
+  // deno-lint-ignore no-unused-vars
+  async function fetchAndCache() {
     await updateCache()
     return await fetchCache()
   }
 
-  const response = f()
+  const response = fetchWithoutCache()
 
   event.respondWith(response)
 })
