@@ -28,7 +28,7 @@ self.addEventListener('fetch', (event) => {
     if (cachedResponse) {
       return cachedResponse
     }
-    return Response('Offline', { status: 503 })
+    return new Response('Offline', { status: 503 })
   }
 
   async function f() {
