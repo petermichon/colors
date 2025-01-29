@@ -10,22 +10,21 @@ self.addEventListener('activate', () => {
 
 self.addEventListener('fetch', (event) => {
   async function f() {
+    const cache = await caches.open('v1')
     try {
       const networkResponse = await fetch(event.request)
-
-      const cache = await caches.open('v1')
-      cache.put(event.request, networkResponse.clone())
-
+      await cache.put(event.request, networkResponse.clone())
       return networkResponse
-    } catch {
-      const cache = await caches.open('v1')
-      const cachedResponse = await cache.match(event.request)
+    } catch (error) {
+      console.log(error) // DEBUG
+    }
 
-      if (cachedResponse !== undefined) {
-        return cachedResponse
-      } else {
-        return new Response('Offline', { status: 503 })
-      }
+    const cachedResponse = await cache.match(event.request)
+
+    if (cachedResponse !== undefined) {
+      return cachedResponse
+    } else {
+      return new Response('Offline', { status: 503 })
     }
   }
 
