@@ -7,26 +7,23 @@ self.addEventListener('activate', () => {
 })
 
 self.addEventListener('fetch', (event) => {
-  console.log('fetch:', event.request.url) // DEBUG
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      // If a cached response is found, return it
+      const cacheResponseFound = cachedResponse !== undefined
+      if (cacheResponseFound) {
+        return cachedResponse
+      }
 
-  // function cacheResponse(cachedResponse) {
-  //   const cacheName = 'v1'
-  //   // If not in cache, fetch from network
-  //   return fetch(event.request).then((response) => {
-  //     // Optionally cache the new files for future use
-  //     const responseClone = response.clone()
-  //     caches.open(cacheName).then((cache) => {
-  //       cache.put(event.request, responseClone) // Cache the new file
-  //     })
-  //     return response
-  //   })
-  // }
-
-  // Try to fetch from the cache
-  // const matchResponse = caches.match(event.request)
-
-  // ?
-  // const response = matchResponse.then(cacheResponse)
-
-  // event.respondWith(response)
+      // If no cached response
+      // Fetch the request from the network
+      return fetch(event.request).then((networkResponse) => {
+        // Cache the network response for future use
+        return caches.open('v1').then((cache) => {
+          cache.put(event.request, networkResponse.clone())
+          return networkResponse
+        })
+      })
+    })
+  )
 })
