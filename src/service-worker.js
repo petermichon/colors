@@ -1,34 +1,38 @@
 self.addEventListener('install', () => {
   console.log('install') // DEBUG
+  self.skipWaiting()
 })
 
 self.addEventListener('activate', () => {
   console.log('activate') // DEBUG
+  self.clients.claim()
 })
 
-// client -> worker
 self.addEventListener('fetch', (event) => {
-  const response = caches.match(event.request).then((cachedResponse) => {
-    // If a cached response is found, return it
-    const cachedResponseFound = cachedResponse !== undefined
-    if (cachedResponseFound) {
-      return cachedResponse
-    }
+  event.respondWith(
+    (async () => {
+      try {
+        // Try fetching from the network
+        const networkResponse = await fetch(event.request)
 
-    // If no cached response
-
-    // worker -> host
-    const networkResponse = fetch(event.request).then(
-      async (networkResponse) => {
-        // worker <- host
-        const cache = await caches.open('v1')
+        // Cache the network response if successful
+        const cache = await caches.open('dynamic-cache')
         cache.put(event.request, networkResponse.clone())
-        return networkResponse
-      }
-    )
-    return networkResponse
-  })
 
-  // client <- worker
-  event.respondWith(response)
+        return networkResponse
+      } catch (error) {
+        // If network fails, check the cache
+        const cache = await caches.open('dynamic-cache')
+        const cachedResponse = await cache.match(event.request)
+
+        // Return cached response or fallback to a default (offline page, etc.)
+        if (cachedResponse) {
+          return cachedResponse
+        }
+
+        // If no cache available, return a default offline response (optional)
+        return new Response('Offline', { status: 503 })
+      }
+    })()
+  )
 })
