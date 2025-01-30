@@ -5,10 +5,10 @@ export class Keyboard {
     // Keyboard.events = new Array();
     Keyboard.events = []
 
-    addEventListener('keydown', (event) => {
+    addEventListener('keydown', (event: KeyboardEvent) => {
       Keyboard.setKeyState(event, true)
     })
-    addEventListener('keyup', (event) => {
+    addEventListener('keyup', (event: KeyboardEvent) => {
       Keyboard.setKeyState(event, false)
     })
   }

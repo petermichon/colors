@@ -15,15 +15,15 @@ export class Mouse {
     // Mouse.events = new Array()
     Mouse.events = []
 
-    globalThis.addEventListener('mousemove', (event) => {
+    globalThis.addEventListener('mousemove', (event: MouseEvent) => {
       Mouse.x = event.clientX
       Mouse.y = event.clientY
     })
 
-    globalThis.addEventListener('mousedown', (event) => {
+    globalThis.addEventListener('mousedown', (event: MouseEvent) => {
       Mouse.setButtonState(event, true)
     })
-    globalThis.addEventListener('mouseup', (event) => {
+    globalThis.addEventListener('mouseup', (event: MouseEvent) => {
       Mouse.setButtonState(event, false)
     })
   }
