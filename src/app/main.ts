@@ -102,10 +102,10 @@ export default function main() {
 
   function animate() {
     // Move player
-    if (keys['KeyA']) player.position.x -= 0.125
-    if (keys['KeyD']) player.position.x += 0.125
-    if (keys['KeyW']) player.position.z -= 0.125
-    if (keys['KeyS']) player.position.z += 0.125
+    // if (keys['KeyW']) player.position.z -= 1 * 0.125 // Z
+    // if (keys['KeyA']) player.position.x -= 1 * 0.125 // Q
+    // if (keys['KeyS']) player.position.z += 1 * 0.125 // S
+    // if (keys['KeyD']) player.position.x += 1 * 0.125 // D
 
     player.position.x += moveX * 0.125
     player.position.z -= moveY * 0.125
