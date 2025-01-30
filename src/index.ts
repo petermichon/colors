@@ -3,7 +3,7 @@ import main from './app/main.ts'
 if ('serviceWorker' in navigator) {
   globalThis.addEventListener('load', () => {
     navigator.serviceWorker
-      .register('/service-worker.js')
+      .register('/service-worker.ts')
       .then((registration) => {
         console.log('scope:', registration.scope) // DEBUG
       })
