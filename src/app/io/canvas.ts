@@ -18,15 +18,15 @@ export class Canvas {
       // event.stopPropagation(); // ?
     }
 
-    window.addEventListener('resize', Canvas.resizeCanvas)
+    globalThis.addEventListener('resize', Canvas.resizeCanvas)
     Canvas.resizeCanvas()
 
     // Canvas.context.scale(1, 1);
   }
 
   private static resizeCanvas() {
-    const width = window.innerWidth
-    const height = window.innerHeight
+    const width = globalThis.innerWidth
+    const height = globalThis.innerHeight
     Canvas.canvas.width = width
     Canvas.canvas.height = height
     // console.log(width, height);
