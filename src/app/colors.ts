@@ -1,29 +1,29 @@
-import { Canvas } from './io/canvas'
-import { Mouse } from './io/mouse'
-import { World } from './world'
+import { Canvas } from './io/canvas.ts'
+import { Mouse } from './io/mouse.ts'
+import { World } from './world.ts'
 
 import {
   // getKeyboardInputs,
   getMouseInputs,
   getCanvasSize,
   calculateFPS,
-} from './systems/A_get'
+} from './systems/A_get.ts'
 import {
   updateFPS,
   updateTarget,
   updateMovementsFromInputs,
   shootBullet,
   updateLifetime,
-} from './systems/B_update'
+} from './systems/B_update.ts'
 import {
   moveToCursorOnGrid,
   moveToTarget,
   moveRandomly,
   moveFromInputs,
   moveToDirection,
-} from './systems/C_move'
-import { sumDeltaMovements } from './systems/D_sync'
-import { showOnGrid, showOnCanvas, showTextOnCanvas } from './systems/E_show'
+} from './systems/C_move.ts'
+import { sumDeltaMovements } from './systems/D_sync.ts'
+import { showOnGrid, showOnCanvas, showTextOnCanvas } from './systems/E_show.ts'
 
 export function loadEntities() {
   // World.add({

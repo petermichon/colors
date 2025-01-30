@@ -1,8 +1,8 @@
-import { World } from '../world'
+import { World } from '../world.ts'
 
-import { moveToDirection } from './C_move'
-import { sumDeltaMovements } from './D_sync'
-import { showOnGrid } from './E_show'
+import { moveToDirection } from './C_move.ts'
+import { sumDeltaMovements } from './D_sync.ts'
+import { showOnGrid } from './E_show.ts'
 
 export function updateFPS(entity: any) {
   const fps = World.query((e) => e.calculateFPS)[0].fps

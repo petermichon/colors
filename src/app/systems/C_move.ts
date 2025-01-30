@@ -1,4 +1,4 @@
-import { World } from '../world'
+import { World } from '../world.ts'
 
 export function moveToCursorOnGrid(entity: any) {
   const mouse = World.query((e) => e.getMouseInputs)[0]

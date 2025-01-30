@@ -1,6 +1,6 @@
-import { Mouse } from '../io/mouse'
-import { Keyboard } from '../io/keyboard'
-import { Canvas } from '../io/canvas'
+import { Mouse } from '../io/mouse.ts'
+import { Keyboard } from '../io/keyboard.ts'
+import { Canvas } from '../io/canvas.ts'
 
 export function getMouseInputs(entity: any) {
   entity.x = Mouse.x

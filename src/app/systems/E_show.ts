@@ -1,5 +1,5 @@
-import { Canvas } from '../io/canvas'
-import { World } from '../world'
+import { Canvas } from '../io/canvas.ts'
+import { World } from '../world.ts'
 
 export function showOnCanvas(entity: any) {
   Canvas.setColor(entity.color)
