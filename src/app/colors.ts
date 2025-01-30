@@ -25,6 +25,9 @@ import {
 import { sumDeltaMovements } from './systems/D_sync.ts'
 import { showOnGrid, showOnCanvas, showTextOnCanvas } from './systems/E_show.ts'
 
+// deno-lint-ignore no-explicit-any
+type Entity = any
+
 export function loadEntities() {
   // World.add({
   //     type: "system-keyboard",
@@ -69,8 +72,8 @@ export function loadEntities() {
   World.add({
     type: 'system-ecs',
     updateEntities() {
-      for (let system of this.systems) {
-        for (let currentEntity of World.entities) {
+      for (const system of this.systems) {
+        for (const currentEntity of World.entities) {
           if (currentEntity[system.update.name]) {
             system.update(currentEntity)
           }
@@ -204,7 +207,7 @@ export function loadMinesweeper() {
   }
 }
 
-function revealOnClick(entity: any) {
+function revealOnClick(entity: Entity) {
   {
     const mouse = World.query((e) => e.getMouseInputs)[0]
     if (!mouse.inputs.shoot) return
