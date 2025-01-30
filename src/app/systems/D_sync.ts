@@ -1,4 +1,7 @@
-export function sumDeltaMovements(entity: any) {
+// deno-lint-ignore no-explicit-any
+type Entity = any
+
+export function sumDeltaMovements(entity: Entity) {
   let totaldx = 0
   let totaldy = 0
   for (let i = 0; i < entity.dx.length; i++) {

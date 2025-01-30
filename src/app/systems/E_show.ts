@@ -1,17 +1,20 @@
 import { Canvas } from '../io/canvas.ts'
 import { World } from '../world.ts'
 
-export function showOnCanvas(entity: any) {
+// deno-lint-ignore no-explicit-any
+type Entity = any
+
+export function showOnCanvas(entity: Entity) {
   Canvas.setColor(entity.color)
   Canvas.rectangle(entity.x, entity.y, entity.width, entity.height)
 }
 
-export function showTextOnCanvas(entity: any) {
+export function showTextOnCanvas(entity: Entity) {
   Canvas.setColor(entity.color)
   Canvas.text(entity.text, entity.x, entity.y)
 }
 
-export function showOnGrid(entity: any) {
+export function showOnGrid(entity: Entity) {
   const zoom = World.query((e) => e.getZoom)[0].getZoom()
 
   Canvas.setColor(entity.color)

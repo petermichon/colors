@@ -1,6 +1,9 @@
 import { World } from '../world.ts'
 
-export function moveToCursorOnGrid(entity: any) {
+// deno-lint-ignore no-explicit-any
+type Entity = any
+
+export function moveToCursorOnGrid(entity: Entity) {
   const mouse = World.query((e) => e.getMouseInputs)[0]
   const scale = World.query((e) => e.getZoom)[0].getZoom()
 
@@ -8,7 +11,7 @@ export function moveToCursorOnGrid(entity: any) {
   entity.y = Math.trunc(mouse.y / scale)
 }
 
-export function moveToTarget(entity: any) {
+export function moveToTarget(entity: Entity) {
   const targetX = entity.target.x
   const targetY = entity.target.y
 
@@ -23,7 +26,7 @@ export function moveToTarget(entity: any) {
   entity.dy.push(Math.round(dy / distance))
 }
 
-export function moveFromInputs(entity: any) {
+export function moveFromInputs(entity: Entity) {
   const inputs = entity.inputs
 
   // Convert inputs to direction
@@ -47,7 +50,7 @@ export function moveFromInputs(entity: any) {
   entity.dy.push(dy)
 }
 
-export function moveRandomly(entity: any) {
+export function moveRandomly(entity: Entity) {
   const inputs = {
     up: Math.random() <= 0.01 ? true : false,
     left: Math.random() <= 0.01 ? true : false,
@@ -57,7 +60,7 @@ export function moveRandomly(entity: any) {
   entity.inputs = inputs
 }
 
-export function moveToDirection(entity: any) {
+export function moveToDirection(entity: Entity) {
   entity.dx.push(entity.direction.dx)
   entity.dy.push(entity.direction.dy)
   // console.log(entity.dx, entity.dy);

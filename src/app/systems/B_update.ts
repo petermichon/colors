@@ -4,23 +4,26 @@ import { moveToDirection } from './C_move.ts'
 import { sumDeltaMovements } from './D_sync.ts'
 import { showOnGrid } from './E_show.ts'
 
-export function updateFPS(entity: any) {
+// deno-lint-ignore no-explicit-any
+type Entity = any
+
+export function updateFPS(entity: Entity) {
   const fps = World.query((e) => e.calculateFPS)[0].fps
   entity.text = `FPS: ${Math.round(fps)}`
 }
 
-export function updateTarget(entity: any) {
+export function updateTarget(entity: Entity) {
   const mouse = World.query((e) => e.moveToCursorOnGrid)[0]
   entity.target.x = mouse.x
   entity.target.y = mouse.y
 }
 
-export function updateMovementsFromInputs(entity: any) {
+export function updateMovementsFromInputs(entity: Entity) {
   const e = World.query((e) => e.getKeyboardInputs)[0]
   entity.inputs = e.inputs
 }
 
-export function shootBullet(entity: any) {
+export function shootBullet(entity: Entity) {
   {
     const mouse = World.query((e) => e.getMouseInputs)[0]
     if (!mouse.inputs.shoot) return
@@ -52,7 +55,7 @@ export function shootBullet(entity: any) {
   })
 }
 
-export function updateLifetime(entity: any) {
+export function updateLifetime(entity: Entity) {
   if (entity.lifetime <= 0) {
     World.remove(entity)
   }
