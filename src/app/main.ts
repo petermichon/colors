@@ -1,10 +1,9 @@
 import * as THREE from 'three'
 
-import { OrbitControls } from 'three/examples/jsm/Addons.js'
+// import { OrbitControls } from 'three/examples/jsm/Addons.js'
+import nipplejs from 'nipplejs'
 
 export default function main() {
-  // ---
-
   const keys: Record<string, boolean> = {}
 
   // Listen for keydown and keyup events
@@ -14,6 +13,30 @@ export default function main() {
 
   globalThis.addEventListener('keyup', (event) => {
     keys[event.code] = false
+  })
+
+  // ---
+
+  // Set up virtual joystick using nipplejs
+  const manager = nipplejs.create({
+    zone: document.body,
+    mode: 'dynamic', // can be 'static' or 'dynamic'
+    position: { left: '15%', top: '80%' },
+  })
+
+  // Variables to track joystick input
+  let moveX = 0
+  let moveY = 0
+
+  manager.on('move', function (evt, data) {
+    moveX = data.vector.x
+    moveY = data.vector.y
+    evt
+  })
+
+  manager.on('end', function () {
+    moveX = 0
+    moveY = 0
   })
 
   // ---
@@ -34,39 +57,39 @@ export default function main() {
   renderer.setAnimationLoop(animate)
   document.body.appendChild(renderer.domElement)
 
-  // Controls
-  const controls = new OrbitControls(camera, renderer.domElement)
-
   // Boxes
   const geometry = new THREE.BoxGeometry(1, 1, 1)
   const material = new THREE.MeshStandardMaterial()
 
-  // function setblock(x: number, y: number, z: number) {
-  //   x += 0.5
-  //   y += 0.5
-  //   z += 0.5
-  //   const mesh = new THREE.Mesh(geometry, material)
-  //   mesh.position.set(x, y, z)
-  //   scene.add(mesh)
-  // }
+  function setblock(x: number, y: number, z: number) {
+    x += 0.5
+    y += 0.5
+    z += 0.5
+    const mesh = new THREE.Mesh(geometry, material)
+    mesh.position.set(x, y, z)
+    scene.add(mesh)
+  }
 
-  // setblock(1, 0, 0)
-  // setblock(2, 0, 0)
-  // setblock(3, 0, 0)
-  // setblock(4, 0, 0)
-  // setblock(5, 0, 0)
-  // setblock(6, 0, 0)
-  // setblock(7, 0, 0)
-  // setblock(8, 0, 0)
-  // setblock(9, 0, 0)
+  setblock(-2, 0, 0)
+  setblock(-1, 0, 0)
+  setblock(1, 0, 0)
+  setblock(2, 0, 0)
+  setblock(3, 0, 0)
+  setblock(4, 0, 0)
+  setblock(5, 0, 0)
+  setblock(6, 0, 0)
+  setblock(7, 0, 0)
+  setblock(8, 0, 0)
+  setblock(9, 0, 0)
+  setblock(9, 1, 0)
 
   // Lights
-  const light = new THREE.PointLight(0xffffff, 1)
-  light.position.set(4.5, 3.5, 1.5)
+  const light = new THREE.PointLight(0xffffff, 5)
+  light.position.set(0, 10, 0)
   scene.add(light)
 
   const player = new THREE.Mesh(geometry, material)
-  player.position.set(5.5, 0.5, 0.5)
+  player.position.set(0.5, 0.5, 0.5)
   scene.add(player)
 
   // Helpers
@@ -77,20 +100,24 @@ export default function main() {
   const lightHelper = new THREE.PointLightHelper(light)
   scene.add(lightHelper)
 
-  controls.update()
-
   function animate() {
-    // mesh.rotation.x = time / 2000;
-    // mesh.rotation.y = time / 1000;
-    // light.position.x += Math.cos(time / 1000) * 0.1;
-    // light.position.z += Math.sin(time / 1000) * 0.05
+    // Move player
+    if (keys['KeyA']) player.position.x -= 0.125
+    if (keys['KeyD']) player.position.x += 0.125
+    if (keys['KeyW']) player.position.z -= 0.125
+    if (keys['KeyS']) player.position.z += 0.125
 
-    // Move the cube based on keyboard input
-    if (keys['KeyA']) player.position.x -= 0.1
-    if (keys['KeyD']) player.position.x += 0.1
+    player.position.x += moveX * 0.125
+    player.position.z -= moveY * 0.125
 
-    if (keys['KeyW']) player.position.z -= 0.1
-    if (keys['KeyS']) player.position.z += 0.1
+    // Move camera
+    camera.position.x = player.position.x + 0
+    camera.position.y = player.position.y + 9
+    camera.position.z = player.position.z + 6
+
+    camera.lookAt(player.position)
+
+    console.log(moveX, moveY)
 
     renderer.render(scene, camera)
   }
