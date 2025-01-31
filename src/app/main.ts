@@ -117,8 +117,6 @@ export default function main() {
 
     camera.lookAt(player.position)
 
-    console.log(moveX, moveY)
-
     renderer.render(scene, camera)
   }
 
