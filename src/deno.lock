@@ -3,6 +3,7 @@
   "specifiers": {
     "jsr:@b-fuze/deno-dom@*": "0.1.49",
     "npm:@types/three@0.169": "0.169.0",
+    "npm:nipplejs@~0.10.2": "0.10.2",
     "npm:three@0.169": "0.169.0",
     "npm:typescript@^5.2.2": "5.6.2",
     "npm:vite@^5.3.2": "5.4.11"
@@ -202,6 +203,9 @@
     "nanoid@3.3.7": {
       "integrity": "sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g=="
     },
+    "nipplejs@0.10.2": {
+      "integrity": "sha512-XGxFY8C2DOtobf1fK+MXINTzkkXJLjZDDpfQhOUZf4TSytbc9s4bmA0lB9eKKM8iDivdr9NQkO7DpIQfsST+9g=="
+    },
     "picocolors@1.1.1": {
       "integrity": "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="
     },
@@ -261,6 +265,7 @@
     "packageJson": {
       "dependencies": [
         "npm:@types/three@0.169",
+        "npm:nipplejs@~0.10.2",
         "npm:three@0.169",
         "npm:typescript@^5.2.2",
         "npm:vite@^5.3.2"
