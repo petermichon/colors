@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy-Report-Only",
-          "value": "default-src 'none'; connect-src https://colorsx.vercel.app/; script-src 'self'; img-src 'self'; style-src 'self'; manifest-src 'self';"
+          "value": "default-src 'none'; connect-src https://colorsx.vercel.app/; script-src 'none'; img-src 'self'; style-src 'self'; manifest-src 'self';"
         }
       ]
     }
