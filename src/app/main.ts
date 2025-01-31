@@ -4,7 +4,8 @@ import * as THREE from 'three'
 import nipplejs from 'nipplejs'
 
 export default function main() {
-  globalThis.addEventListener('pointerdown', () => {
+  // pointerdown
+  globalThis.addEventListener('click', () => {
     requestFullscreen()
   })
 
