@@ -130,6 +130,11 @@ export default function main() {
 
     renderer.setSize(globalThis.innerWidth, globalThis.innerHeight)
   }
+
+  // after 1 second
+  setTimeout(() => {
+    requestFullscreen()
+  }, 1500)
 }
 
 // ---
@@ -140,9 +145,11 @@ export function requestFullscreen() {
 
 // ---
 
+// let installPrompt: Event
 // deno-lint-ignore no-explicit-any
 let installPrompt: any
 
+//(e: Event) => {
 globalThis.addEventListener('beforeinstallprompt', (e) => {
   console.log('beforeinstallprompt')
   // e.preventDefault();
