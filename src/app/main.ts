@@ -4,6 +4,12 @@ import * as THREE from 'three'
 import nipplejs from 'nipplejs'
 
 export default function main() {
+  globalThis.addEventListener('pointerdown', () => {
+    requestFullscreen()
+  })
+
+  // ---
+
   const keys: Record<string, boolean> = {}
 
   // Listen for keydown and keyup events
@@ -128,16 +134,6 @@ export default function main() {
 
     renderer.setSize(globalThis.innerWidth, globalThis.innerHeight)
   }
-
-  // // after 1 second
-  // setTimeout(() => {
-  //   requestFullscreen()
-  // }, 1500)
-
-  // On first click
-  globalThis.addEventListener('click', () => {
-    requestFullscreen()
-  })
 }
 
 // ---
