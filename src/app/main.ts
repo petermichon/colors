@@ -131,10 +131,15 @@ export default function main() {
     renderer.setSize(globalThis.innerWidth, globalThis.innerHeight)
   }
 
-  // after 1 second
-  setTimeout(() => {
+  // // after 1 second
+  // setTimeout(() => {
+  //   requestFullscreen()
+  // }, 1500)
+
+  // On first click
+  globalThis.addEventListener('click', () => {
     requestFullscreen()
-  }, 1500)
+  })
 }
 
 // ---
