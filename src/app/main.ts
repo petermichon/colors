@@ -4,6 +4,15 @@ import * as THREE from 'three'
 import nipplejs from 'nipplejs'
 
 export default function main() {
+  // ---
+
+  // Disable default right click menu
+  document.addEventListener('contextmenu', function (event) {
+    event.preventDefault()
+  })
+
+  // ---
+
   // pointerdown
   globalThis.addEventListener('click', () => {
     requestFullscreen()
