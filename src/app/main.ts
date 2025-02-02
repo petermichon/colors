@@ -13,10 +13,10 @@ export default function main() {
 
   // ---
 
-  // pointerdown
-  globalThis.addEventListener('click', () => {
-    requestFullscreen()
-  })
+  // 'pointerdown'
+  // globalThis.addEventListener('click', () => {
+  //   requestFullscreen()
+  // })
 
   // ---
 
