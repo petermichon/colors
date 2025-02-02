@@ -108,6 +108,35 @@ export default function main() {
   player.position.set(0.5, 0.5, 0.5)
   scene.add(player)
 
+  // ---
+
+  // Set up raycaster and mouse vector for detecting clicks
+  const raycaster = new THREE.Raycaster()
+  const mouse = new THREE.Vector2()
+
+  const blueMat = new THREE.MeshBasicMaterial({ color: 0x007bff }) // Blue color
+  const button = new THREE.Mesh(geometry, blueMat)
+  button.position.set(0.5, 0.5, -5.5) // Position the button in front of the camera
+  scene.add(button)
+
+  function onMouseClick(event: MouseEvent) {
+    // Calculate mouse position in normalized device coordinates (-1 to +1)
+    mouse.x = (event.clientX / globalThis.innerWidth) * 2 - 1
+    mouse.y = -(event.clientY / globalThis.innerHeight) * 2 + 1
+
+    raycaster.setFromCamera(mouse, camera)
+
+    // Check for intersections between the ray and the button
+    const intersects = raycaster.intersectObject(button)
+    if (intersects.length > 0) {
+      requestFullscreen()
+    }
+  }
+
+  document.addEventListener('click', onMouseClick, false)
+
+  // ---
+
   // Helpers
   const gridSize = 50
   const gridHelper = new THREE.GridHelper(gridSize, gridSize)
@@ -115,6 +144,8 @@ export default function main() {
 
   const lightHelper = new THREE.PointLightHelper(light)
   scene.add(lightHelper)
+
+  // ---
 
   function animate() {
     // Move player
