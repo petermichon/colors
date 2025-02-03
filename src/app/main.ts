@@ -34,26 +34,30 @@ export default function main() {
   // ---
 
   // Set up virtual joystick using nipplejs
-  const manager = nipplejs.create({
+  const joystick = nipplejs.create({
     zone: document.body,
-    mode: 'dynamic', // can be 'static' or 'dynamic'
+    mode: 'dynamic',
     position: { left: '15%', top: '80%' },
     follow: true,
     size: 100,
-    color: 'rgba(0, 0, 0, 0)',
+    // dataOnly: true, // Bugged
+    // color: 'rgba(0, 0, 0, 0)',
   })
 
   // Variables to track joystick input
   let moveX = 0
   let moveY = 0
+  // let moveDistance = 0
 
-  manager.on('move', function (evt, data) {
+  joystick.on('move', function (evt, data) {
     moveX = data.vector.x
     moveY = data.vector.y
     evt
+
+    // moveDistance = data.distance
   })
 
-  manager.on('end', function () {
+  joystick.on('end', function () {
     moveX = 0
     moveY = 0
   })
@@ -107,7 +111,31 @@ export default function main() {
   light.position.set(0, 10, 0)
   scene.add(light)
 
-  const player = new THREE.Mesh(geometry, material)
+  // ---
+
+  const roundCube = new THREE.Shape()
+  const radius = 1 / 8
+  const size = 1 / 4
+
+  const angleStep = Math.PI * 0.5
+  roundCube.absarc(size, size, radius, angleStep * 0, angleStep * 1)
+  roundCube.absarc(-size, size, radius, angleStep * 1, angleStep * 2)
+  roundCube.absarc(-size, -size, radius, angleStep * 2, angleStep * 3)
+  roundCube.absarc(size, -size, radius, angleStep * 3, angleStep * 4)
+
+  const geometryRoundCube = new THREE.ExtrudeGeometry(roundCube, {
+    depth: 1,
+    bevelEnabled: true,
+    bevelThickness: 0.05,
+    bevelSize: 0.05,
+    bevelSegments: 20,
+    curveSegments: 20,
+  })
+
+  geometryRoundCube.center()
+  geometryRoundCube.rotateX(Math.PI * -0.5)
+
+  const player = new THREE.Mesh(geometryRoundCube, material)
   player.position.set(0.5, 0.5, 0.5)
   scene.add(player)
 
@@ -206,11 +234,12 @@ export default function main() {
     dot.position.z = player.position.z + -delta * up + +delta * down
     dot.position.x = player.position.x + -delta * left + +delta * right
 
-    // console.log(keys['KeyW'], keys['KeyA'], keys['KeyS'], keys['KeyD'])
-
     // ---
 
-    if (moveX != 0 || moveY != 0) {
+    const moving = moveX != 0 || moveY != 0
+    // const moving = moveDistance != 0 // Doesn't work as it's not updated
+
+    if (moving) {
       dot.position.x = player.position.x + moveX * 1.5
       dot.position.z = player.position.z - moveY * 1.5
     }
@@ -229,6 +258,13 @@ export default function main() {
     if (magnitude != 0) {
       deltaX = deltaX / magnitude
       deltaY = deltaY / magnitude
+    }
+
+    const threshold = 0.5
+
+    if (magnitude < threshold) {
+      deltaX = 0
+      deltaY = 0
     }
 
     // Move player
