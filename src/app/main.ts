@@ -147,15 +147,28 @@ export default function main() {
 
   // ---
 
+  const whiteMat = new THREE.MeshBasicMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.5,
+    depthTest: false, // Disable depth test
+  })
+
   // Circle flat to the ground
   const circleGeom = new THREE.CircleGeometry(0.25, 32)
 
-  const dot = new THREE.Mesh(circleGeom, blueMat)
+  const dot = new THREE.Mesh(circleGeom, whiteMat)
   dot.position.set(5.5, 0, 3.5)
   dot.rotateX(-Math.PI / 2)
   scene.add(dot)
 
   // ---
+
+  // Set to false (default is undefined)
+  keys['KeyW'] = false
+  keys['KeyA'] = false
+  keys['KeyS'] = false
+  keys['KeyD'] = false
 
   function animate() {
     // Move player
@@ -167,8 +180,37 @@ export default function main() {
     // dot.position.x += moveX * 0.5
     // dot.position.z -= moveY * 0.5
 
-    dot.position.x = player.position.x + moveX * 1.5
-    dot.position.z = player.position.z - moveY * 1.5
+    // ---
+
+    let delta = 1.5
+
+    const isDiagonal =
+      keys['KeyW'] != keys['KeyS'] && keys['KeyA'] != keys['KeyD']
+
+    console.log(isDiagonal)
+
+    if (isDiagonal) delta *= 1 / Math.sqrt(2)
+
+    let up = 0
+    let down = 0
+    let left = 0
+    let right = 0
+    if (keys['KeyW']) up = 1
+    if (keys['KeyS']) down = 1
+    if (keys['KeyA']) left = 1
+    if (keys['KeyD']) right = 1
+
+    dot.position.z = player.position.z + -delta * up + +delta * down
+    dot.position.x = player.position.x + -delta * left + +delta * right
+
+    // console.log(keys['KeyW'], keys['KeyA'], keys['KeyS'], keys['KeyD'])
+
+    // ---
+
+    if (moveX != 0 || moveY != 0) {
+      dot.position.x = player.position.x + moveX * 1.5
+      dot.position.z = player.position.z - moveY * 1.5
+    }
 
     // ---
 
