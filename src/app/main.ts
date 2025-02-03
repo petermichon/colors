@@ -41,7 +41,7 @@ export default function main() {
     follow: true,
     size: 100,
     // dataOnly: true, // Bugged
-    // color: 'rgba(0, 0, 0, 0)',
+    color: 'rgba(0, 0, 0, 0)',
   })
 
   // Variables to track joystick input
@@ -95,7 +95,6 @@ export default function main() {
 
   setblock(-2, 0, 0)
   setblock(-1, 0, 0)
-  setblock(1, 0, 0)
   setblock(2, 0, 0)
   setblock(3, 0, 0)
   setblock(4, 0, 0)
@@ -106,12 +105,39 @@ export default function main() {
   setblock(9, 0, 0)
   setblock(9, 1, 0)
 
-  // Lights
+  setblock(3, 0, -1)
+  setblock(3, 0, 0)
+  setblock(3, 0, 1)
+  setblock(3, 0, 4)
+  setblock(3, 0, 5)
+  setblock(3, 0, 6)
+
+  setblock(4, 0, 9)
+  setblock(4, 0, 10)
+
+  setblock(6, 0, 0)
+  setblock(6, 0, 3)
+  setblock(6, 0, 6)
+
+  setblock(9, 0, 1)
+
+  setblock(11, 0, 4)
+
+  // ---
+
+  // Ambiant Lights
   const light = new THREE.PointLight(0xffffff, 5)
   light.position.set(0, 10, 0)
   scene.add(light)
 
   // ---
+  // Player light
+  // const playerLight = new THREE.PointLight(0xffffff, 3)
+  // light.position.set(0.5, 0.5, 0.5)
+  // scene.add(playerLight)
+
+  // ---
+  // Player
 
   const roundCube = new THREE.Shape()
   const radius = 1 / 8
@@ -135,7 +161,10 @@ export default function main() {
   geometryRoundCube.center()
   geometryRoundCube.rotateX(Math.PI * -0.5)
 
-  const player = new THREE.Mesh(geometryRoundCube, material)
+  const playerMaterial = new THREE.MeshMatcapMaterial()
+  // whiteMaterial.side = THREE.DoubleSide
+
+  const player = new THREE.Mesh(geometryRoundCube, playerMaterial)
   player.position.set(0.5, 0.5, 0.5)
   scene.add(player)
 
@@ -145,9 +174,9 @@ export default function main() {
   const raycaster = new THREE.Raycaster()
   const mouse = new THREE.Vector2()
 
-  const blueMat = new THREE.MeshBasicMaterial({ color: 0x007bff }) // Blue color
+  const blueMat = new THREE.MeshMatcapMaterial({ color: 0x007bff })
   const button = new THREE.Mesh(geometry, blueMat)
-  button.position.set(0.5, 0.5, -5.5) // Position the button in front of the camera
+  button.position.set(0.5, 0.5, -5.5)
   scene.add(button)
 
   function onMouseClick(event: MouseEvent) {
@@ -173,10 +202,11 @@ export default function main() {
   const gridHelper = new THREE.GridHelper(gridSize, gridSize)
   scene.add(gridHelper)
 
-  const lightHelper = new THREE.PointLightHelper(light)
-  scene.add(lightHelper)
+  // const lightHelper = new THREE.PointLightHelper(light)
+  // scene.add(lightHelper)
 
   // ---
+  // Dot
 
   const whiteMat = new THREE.MeshBasicMaterial({
     color: 0xffffff,
@@ -274,6 +304,13 @@ export default function main() {
     // Rotate player
     const angle = Math.atan2(deltaX, deltaY)
     player.rotation.y = angle
+
+    // ---
+
+    // Move light
+    light.position.x = player.position.x + 0
+    light.position.y = player.position.y + 5
+    light.position.z = player.position.z + 0
 
     // ---
 
