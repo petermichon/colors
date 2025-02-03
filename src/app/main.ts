@@ -39,8 +39,8 @@ export default function main() {
     mode: 'dynamic', // can be 'static' or 'dynamic'
     position: { left: '15%', top: '80%' },
     follow: true,
-    size: 100,
-    // color: 'rgba(0, 0, 0, 0)',
+    size: 300,
+    color: 'rgba(0, 0, 0, 0)',
   })
 
   // Variables to track joystick input
@@ -231,13 +231,20 @@ export default function main() {
       deltaY = deltaY / magnitude
     }
 
+    // Move player
     player.position.x += deltaX * 0.125
     player.position.z += deltaY * 0.125
+
+    // Rotate player
+    const angle = Math.atan2(deltaX, deltaY)
+    player.rotation.y = angle
+
+    // ---
 
     // Move camera
     camera.position.x = player.position.x + 0
     camera.position.y = player.position.y + 9
-    camera.position.z = player.position.z + 4
+    camera.position.z = player.position.z + 0
 
     camera.lookAt(player.position)
 
