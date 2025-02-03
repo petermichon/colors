@@ -147,6 +147,16 @@ export default function main() {
 
   // ---
 
+  // Circle flat to the ground
+  const circleGeom = new THREE.CircleGeometry(0.25, 32)
+
+  const dot = new THREE.Mesh(circleGeom, blueMat)
+  dot.position.set(5.5, 0, 3.5)
+  dot.rotateX(-Math.PI / 2)
+  scene.add(dot)
+
+  // ---
+
   function animate() {
     // Move player
     // if (keys['KeyW']) player.position.z -= 1 * 0.125 // Z
@@ -154,13 +164,35 @@ export default function main() {
     // if (keys['KeyS']) player.position.z += 1 * 0.125 // S
     // if (keys['KeyD']) player.position.x += 1 * 0.125 // D
 
-    player.position.x += moveX * 0.125
-    player.position.z -= moveY * 0.125
+    // dot.position.x += moveX * 0.5
+    // dot.position.z -= moveY * 0.5
+
+    dot.position.x = player.position.x + moveX * 1.5
+    dot.position.z = player.position.z - moveY * 1.5
+
+    // ---
+
+    let deltaX = 0
+    let deltaY = 0
+
+    deltaX = dot.position.x - player.position.x
+    deltaY = dot.position.z - player.position.z
+
+    const magnitude = Math.sqrt(deltaX ** 2 + deltaY ** 2)
+
+    // Normalize
+    if (magnitude != 0) {
+      deltaX = deltaX / magnitude
+      deltaY = deltaY / magnitude
+    }
+
+    player.position.x += deltaX * 0.125
+    player.position.z += deltaY * 0.125
 
     // Move camera
     camera.position.x = player.position.x + 0
     camera.position.y = player.position.y + 9
-    camera.position.z = player.position.z + 6
+    camera.position.z = player.position.z + 4
 
     camera.lookAt(player.position)
 
