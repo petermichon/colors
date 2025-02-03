@@ -39,7 +39,7 @@ export default function main() {
     mode: 'dynamic', // can be 'static' or 'dynamic'
     position: { left: '15%', top: '80%' },
     follow: true,
-    size: 300,
+    size: 100,
     color: 'rgba(0, 0, 0, 0)',
   })
 
@@ -244,7 +244,7 @@ export default function main() {
     // Move camera
     camera.position.x = player.position.x + 0
     camera.position.y = player.position.y + 9
-    camera.position.z = player.position.z + 0
+    camera.position.z = player.position.z + 4
 
     camera.lookAt(player.position)
 
