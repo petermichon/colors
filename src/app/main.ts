@@ -38,6 +38,9 @@ export default function main() {
     zone: document.body,
     mode: 'dynamic', // can be 'static' or 'dynamic'
     position: { left: '15%', top: '80%' },
+    follow: true,
+    size: 100,
+    // color: 'rgba(0, 0, 0, 0)',
   })
 
   // Variables to track joystick input
